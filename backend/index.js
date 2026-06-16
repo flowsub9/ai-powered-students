@@ -1,4 +1,6 @@
 require('dotenv').config();
+const Groq = require('groq-sdk');  // add this
+const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });  // add this
 const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
@@ -87,26 +89,17 @@ app.post('/chat', async (req, res) => {
   db.query('SELECT * FROM students', async (err, students) => {
     if (err) throw err;
 
-    // build messages array with history
     const messages = [
-      // system context
-      { role: 'system', content: `You are a helpful assistant who is strong in calculations, who knows numbers well, who is aware what is greater than what. who gives concise answer, answers in simple english not object like data, Here is the students data: ${JSON.stringify(students)}.` },
-      // previous conversation history
+      { role: 'system', content: `You are a helpful assistant who is strong in calculations. who gives concise answer. Here is the students data: ${JSON.stringify(students)}.` },
       ...history,
     ];
 
-    const response = await fetch('http://localhost:11434/api/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'llama3.2:3b',
-        messages: messages,
-        stream: false
-      })
+    const response = await groq.chat.completions.create({
+      model: 'llama-3.1-8b-instant',
+      messages: messages,
     });
 
-    const data = await response.json();
-    res.json({ answer: data.message.content });
+    res.json({ answer: response.choices[0].message.content });
   });
 });
 app.listen(5000, () => console.log('Server running on port 5000'));
