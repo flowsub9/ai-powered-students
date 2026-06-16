@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const API = "http://localhost:5000/students";
+const API = 'https://ai-powered-students-backend.onrender.com/students';
 
 export default function App() {
   const [students, setStudents] = useState([]);
@@ -62,10 +62,7 @@ const handleChat = async () => {
   setChatHistory(newHistory);
 
   // send question and history to backend
-  const res = await axios.post('http://localhost:5000/chat', { 
-    question, 
-    history: newHistory 
-  });
+const res = await axios.post('https://ai-powered-students-backend.onrender.com/chat', { question, history: newHistory });
 
   // add AI answer to history
   setChatHistory([...newHistory, { role: 'assistant', content: res.data.answer }]);
