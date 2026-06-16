@@ -15,7 +15,8 @@ export default function App() {
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    if (password === import.meta.env.VITE_PASSWORD) {
+    if (password === "nwo@99") {
+      
       setIsLoggedIn(true);
     } else {
       alert('Wrong password!');
