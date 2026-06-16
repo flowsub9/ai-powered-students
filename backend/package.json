@@ -11,6 +11,7 @@
   "type": "commonjs",
   "description": "",
   "dependencies": {
+    "dotenv": "^17.4.2",
     "groq-sdk": "^1.2.1",
     "pg": "^8.21.0",
     "postgres": "^3.4.9"
