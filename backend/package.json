@@ -11,8 +11,11 @@
   "type": "commonjs",
   "description": "",
   "dependencies": {
+    "cors": "^2.8.6",
     "dotenv": "^17.4.2",
+    "express": "^5.2.1",
     "groq-sdk": "^1.2.1",
+    "mysql2": "^3.22.5",
     "pg": "^8.21.0",
     "postgres": "^3.4.9"
   }
