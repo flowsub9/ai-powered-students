@@ -51,6 +51,8 @@ app.delete('/students/:id', async (req, res) => {
 });
 
 // ----------------------------------
+
+
 app.post('/chat', async (req, res) => {
   const { question, history } = req.body;
   const result = await db.query('SELECT * FROM students');

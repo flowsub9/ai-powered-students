@@ -11,13 +11,13 @@ export default function App() {
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
   const [chatHistory, setChatHistory] = useState([]);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn') === 'true');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
+const handleLogin = () => {
     if (password === import.meta.env.VITE_PASSWORD) {
-      
       setIsLoggedIn(true);
+      localStorage.setItem('isLoggedIn', 'true');
     } else {
       alert('Wrong password!');
     }
